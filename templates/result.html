@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Result</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; height: 100vh; margin: 0; display: flex; align-items: center; justify-content: center; }
+        .res-card { max-width: 450px; width: 90%; background: white; padding: 50px; border-radius: 30px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .status-bar { height: 8px; width: 100px; margin: 0 auto 20px; border-radius: 4px; }
+        h2 { color: #2c3e50; margin-bottom: 10px; font-size: 28px; }
+        p { color: #7f8c8d; line-height: 1.6; margin-bottom: 35px; }
+        .btn-back { text-decoration: none; color: #4a90e2; font-weight: bold; border: 2px solid #4a90e2; padding: 12px 30px; border-radius: 12px; transition: 0.3s; }
+        .btn-back:hover { background: #4a90e2; color: white; }
+    </style>
+</head>
+<body>
+    <div class="res-card">
+        <div id="bar" class="status-bar" style="background-color: #ccc;"></div>
+        <h2 id="title">{{ text }}</h2>
+        <p>{{ desc }}</p>
+        <a href="/" class="btn-back">New Assessment</a>
+    </div>
+
+    <script>
+        const finalColor = "{{ color }}"; 
+        document.getElementById('bar').style.backgroundColor = finalColor;
+        document.getElementById('title').style.color = finalColor;
+    </script>
+</body>
+</html>
