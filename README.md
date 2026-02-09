@@ -1,5 +1,5 @@
 # ASD Screening Assistant
-An AI-powered web application that uses a Random Forest model to screen for traits associated with ASD.
+A web application that uses a Random Forest model to screen for traits associated with ASD.
 
 ## How to Run
 1. Install dependencies: `pip install -r requirements.txt`
