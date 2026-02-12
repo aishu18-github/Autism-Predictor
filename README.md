@@ -2,6 +2,7 @@
 
 An end-to-end Machine Learning web application. This tool assists in the preliminary screening of Autism Spectrum Disorder (ASD) traits by analyzing clinical AQ-10 parameters through a Random Forest Classifier.
 
+[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-RENDER-black?style=for-the-badge&logo=render&logoColor=white)](https://autism-predictor-wvon.onrender.com)
 ---
 
 ## 🚀 Key Features
