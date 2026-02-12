@@ -4,47 +4,39 @@
     <meta charset="UTF-8">
     <title>ASD AI Screening</title>
     <style>
-        :root { --primary: #4a90e2; --bg: #f0f4f8; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 40px; display: flex; justify-content: center; }
-        .card { max-width: 600px; width: 100%; background: white; padding: 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        h1 { color: #2c3e50; font-size: 32px; text-align: center; }
-        .form-row { margin-bottom: 25px; }
-        label { display: block; font-weight: 600; margin-bottom: 10px; color: #34495e; }
-        select, input { width: 100%; padding: 14px; border: 2px solid #e0e6ed; border-radius: 12px; font-size: 16px; box-sizing: border-box; }
-        .btn { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 20px; }
-        .btn:hover { background: #357abd; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(74,144,226,0.3); }
+        :root { --primary: #4a90e2; --bg: #f8fafc; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 40px 20px; display: flex; justify-content: center; }
+        .card { max-width: 700px; width: 100%; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .form-row { margin-bottom: 22px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; color: #334155; line-height: 1.5; }
+        select, input { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 15px; }
+        .btn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 17px; font-weight: bold; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1>Assessment</h1>
-        <p style="text-align:center; color:#7f8c8d;">Complete the screening for AI analysis.</p>
+        <h2 style="text-align:center; color:#1e293b; margin-top:0;">AI Behavioral Screening</h2>
         <form action="/predict" method="post">
             {% for col in columns %}
-                {% if col in ['ethnicity', 'contry_of_res', 'relation'] %}
+                {% if col in ['ethnicity', 'contry_of_res', 'relation', 'result'] %}
                     <input type="hidden" name="{{ col }}" value="0">
                 {% else %}
                     <div class="form-row">
                         <label>
-                            {% if col == 'age' %} Patient's Age
-                            {% elif col == 'gender' %} Gender
-                            {% elif col == 'jundice' %} History of Jaundice?
-                            {% elif col == 'austim' %} Family History of ASD?
-                            {% elif 'A' in col %} Question {{ col.split('_')[0] }}
-                            {% else %} {{ col.replace('_', ' ') }} {% endif %}
+                            {% set qs = {'A1_Score': '1. Do they notice small sounds others miss?', 'A2_Score': '2. Do they focus on the whole picture?', 'A3_Score': '3. Easy to multi-task?', 'A4_Score': '4. Easy to switch back after interruption?', 'A5_Score': '5. Easy to read social cues?', 'A6_Score': '6. Can they tell if someone is bored?', 'A7_Score': '7. Easy to imagine characters in stories?', 'A8_Score': '8. Do they collect info on specific categories?', 'A9_Score': '9. Easy to know what others feel?', 'A10_Score': '10. Difficult to know intentions?'} %}
+                            {% if col == 'age' %} Patient Age {% elif col == 'gender' %} Gender {% elif col == 'jundice' %} Born with Jaundice? {% elif col == 'austim' %} Family History of ASD? {% elif col in qs %} {{ qs[col] }} {% else %} {{ col }} {% endif %}
                         </label>
                         {% if col == 'age' %}
-                            <input type="number" name="{{ col }}" required>
+                            <input type="number" name="{{ col }}" value="25" required>
+                        {% elif col == 'gender' %}
+                            <select name="{{ col }}"><option value="1">Male</option><option value="0">Female</option></select>
                         {% else %}
-                            <select name="{{ col }}" required>
-                                <option value="1">{% if col == 'gender' %}Male{% else %}Yes{% endif %}</option>
-                                <option value="0">{% if col == 'gender' %}Female{% else %}No{% endif %}</option>
-                            </select>
+                            <select name="{{ col }}"><option value="0">No</option><option value="1">Yes</option></select>
                         {% endif %}
                     </div>
                 {% endif %}
             {% endfor %}
-            <button type="submit" class="btn">Analyze Now</button>
+            <button type="submit" class="btn">Generate Diagnostic Report</button>
         </form>
     </div>
 </body>

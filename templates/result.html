@@ -2,29 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Analysis Result</title>
+    <title>Diagnostic Report</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; height: 100vh; margin: 0; display: flex; align-items: center; justify-content: center; }
-        .res-card { max-width: 450px; width: 90%; background: white; padding: 50px; border-radius: 30px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .status-bar { height: 8px; width: 100px; margin: 0 auto 20px; border-radius: 4px; }
-        h2 { color: #2c3e50; margin-bottom: 10px; font-size: 28px; }
-        p { color: #7f8c8d; line-height: 1.6; margin-bottom: 35px; }
-        .btn-back { text-decoration: none; color: #4a90e2; font-weight: bold; border: 2px solid #4a90e2; padding: 12px 30px; border-radius: 12px; transition: 0.3s; }
-        .btn-back:hover { background: #4a90e2; color: white; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f1f5f9; padding: 30px; display: flex; justify-content: center; }
+        .res-card { max-width: 1200px; width: 100%; background: white; padding: 40px; border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); text-align: center; }
+        .status-bar { height: 8px; width: 120px; margin: 0 auto 20px; border-radius: 4px; background: #cbd5e1; }
+        .dashboard-img { width: 100%; border-radius: 15px; margin: 25px 0; border: 1px solid #e2e8f0; }
+        .btn-back { text-decoration: none; color: #4a90e2; font-weight: bold; border: 2px solid #4a90e2; padding: 12px 30px; border-radius: 12px; display: inline-block; }
     </style>
 </head>
 <body>
     <div class="res-card">
-        <div id="bar" class="status-bar" style="background-color: #ccc;"></div>
-        <h2 id="title">{{ text }}</h2>
-        <p>{{ desc }}</p>
+        <div id="bar" class="status-bar"></div>
+        <h2 id="title" style="font-size: 34px; margin: 0;">{{ text }}</h2>
+        <p style="font-size: 18px; color: #64748b; margin: 10px 0;">AI Confidence: <b>{{ confidence }}%</b></p>
+        
+        <div style="background: #f8fafc; padding: 25px; border-radius: 20px; margin: 30px 0;">
+            <h3 style="color: #1e293b; margin-top: 0;">🔬 Automated Diagnostic Console</h3>
+            <img src="data:image/png;base64,{{ chart }}" class="dashboard-img">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); font-size: 12px; color: #94a3b8; font-weight: 600;">
+                <span>(1) AGE RELATIVE DENSITY</span>
+                <span>(2) INTENSITY HEATMAP</span>
+                <span>(3) TRAIT CLUSTERS</span>
+                <span>(4) MODEL INDICATORS</span>
+            </div>
+        </div>
+
+        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 30px;">{{ desc }}</p>
         <a href="/" class="btn-back">New Assessment</a>
     </div>
-
     <script>
-        const finalColor = "{{ color }}"; 
-        document.getElementById('bar').style.backgroundColor = finalColor;
-        document.getElementById('title').style.color = finalColor;
+        const col = "{{ color }}";
+        document.getElementById('bar').style.backgroundColor = col;
+        document.getElementById('title').style.color = col;
     </script>
 </body>
 </html>
