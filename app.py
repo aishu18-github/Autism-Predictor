@@ -85,5 +85,13 @@ def predict():
     except Exception as e:
         return f"System Error: {e}"
 
+# --- CLEANED FINAL BLOCK ---
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    # This checks if we are on Render (which provides a PORT) 
+    # or on your local computer (which uses 5000)
+    port = int(os.environ.get("PORT", 5000))
+    
+    # Run the app
+    # host='0.0.0.0' is required for cloud deployment
+    app.run(host='0.0.0.0', port=port, debug=False)
